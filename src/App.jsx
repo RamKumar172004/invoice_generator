@@ -245,8 +245,10 @@ function App() {
         }
       }
 
-      const fileName =
-        `${customer.project || "Invoice"}-${invoice.invoiceNumber}`.trim();
+      const fileName = (customer.project.trim() || "Invoice").replace(
+        /[\/\\:*?"<>|]/g,
+        "-",
+      );
 
       pdf.save(`${fileName}.pdf`);
     } finally {
