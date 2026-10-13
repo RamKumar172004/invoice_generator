@@ -95,7 +95,8 @@ function App() {
       {
         id: Date.now(),
         description: "",
-        quantity: 1,
+        quantity: "",
+        unit: "Nos",
         price: "",
       },
     ]);
@@ -450,12 +451,33 @@ function App() {
                     <input
                       type="number"
                       min="0"
+                      step="any"
                       value={item.quantity}
                       onChange={(e) =>
                         updateItem(item.id, "quantity", e.target.value)
                       }
                       placeholder="Qty"
                     />
+                  </div>
+
+                  <div className="field small">
+                    <label>Unit</label>
+
+                    <select
+                      value={item.unit}
+                      onChange={(e) =>
+                        updateItem(item.id, "unit", e.target.value)
+                      }
+                    >
+                      <option value="Nos">Nos</option>
+                      <option value="Ft">Ft</option>
+                      <option value="Sq Ft">Sq Ft</option>
+                      <option value="Meters">Meters</option>
+                      <option value="Sq M">Sq M</option>
+                      <option value="Kg">Kg</option>
+                      <option value="Hours">Hours</option>
+                      <option value="Lot">Lot</option>
+                    </select>
                   </div>
 
                   <div className="field small">
@@ -690,7 +712,10 @@ function App() {
 
                     <td>{item.description || ""}</td>
 
-                    <td>{item.quantity || ""}</td>
+                    <td>
+                      {item.quantity || ""}
+                      {item.unit ? ` ${item.unit}` : ""}
+                    </td>
 
                     <td>{money(item.price)}</td>
 
